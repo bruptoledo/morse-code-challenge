@@ -1,12 +1,10 @@
 from flask import jsonify, make_response
 
 from back.application.morse.controllers.morse import Morse
-from back.application.morse.schemas import Decoder
 
 
 class MorseDecoder(Morse):
-    """MorseDecoder class used to decode a text
-    in morse code.
+    """MorseDecoder class used to decode a text in morse code.
 
     Attributes:
         _morse_dict (dict): letters of the dictionary and numbers as keys.
@@ -23,7 +21,7 @@ class MorseDecoder(Morse):
             response (:obj: Response): response of the request.
 
         """
-        payload = Decoder().load(request.json)
+        payload = request.json
         text = payload.get("text").upper()
         result = ""
         for i in text.split():

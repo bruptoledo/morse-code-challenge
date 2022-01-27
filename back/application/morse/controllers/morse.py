@@ -1,15 +1,9 @@
-from werkzeug.exceptions import NotImplemented
-
-
 class Morse:
     """Morse parent class for inheriting the MorseEncoder and MorseDecoder classes.
 
     Attributes:
         _morse_dict (dict): letters of the dictionary and numbers as keys.
         _morse_dict_reversed (dict): morse code as keys.
-
-    Raises:
-        NotImplemented: If post function is called without implementation.
 
     """
 
@@ -54,6 +48,3 @@ class Morse:
             " ": " ",
         }
         self._morse_dict_reversed = {value: key for key, value in self._morse_dict.items()}
-
-    def post(self, request):
-        raise NotImplemented

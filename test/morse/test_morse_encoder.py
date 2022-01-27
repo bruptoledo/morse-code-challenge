@@ -30,7 +30,7 @@ def test_post_morse_encoder_invalid_character(client):
     )
     assert request.status_code == 400
     response = request.json
-    assert response["message"] == "Not a valid caractere"
+    assert response["message"] == "Not a valid character"
 
 
 def test_post_morse_encoder_invalid_payload(client):
