@@ -1,10 +1,10 @@
 from flask import jsonify, make_response
 
-from back.application.morse.controllers.morse_dictionary import MORSE_DICT
+from back.application.morse.controllers.morse import Morse
 from back.application.morse.schemas import Decoder
 
 
-class MorseDecoder:
+class MorseDecoder(Morse):
     """MorseDecoder class used to decode a text
     in morse code.
 
@@ -13,10 +13,6 @@ class MorseDecoder:
         _morse_dict_reversed (dict): morse code as keys.
 
     """
-
-    def __init__(self):
-        self._morse_dict = MORSE_DICT
-        self._morse_dict_reversed = {value: key for key, value in self._morse_dict.items()}
 
     def post(self, request):
         """Method that decodes morse code into normal text.

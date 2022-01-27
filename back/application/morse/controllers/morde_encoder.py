@@ -1,10 +1,10 @@
 from flask import jsonify, make_response
 
-from back.application.morse.controllers.morse_dictionary import MORSE_DICT
+from back.application.morse.controllers.morse import Morse
 from back.application.morse.schemas import Encoder
 
 
-class MorseEncoder:
+class MorseEncoder(Morse):
     """MorseEncoder class used to encode a text
     in morse code.
 
@@ -12,9 +12,6 @@ class MorseEncoder:
         _morse_dict (dict): letters of the dictionary and numbers as keys.
 
     """
-
-    def __init__(self):
-        self._morse_dict = MORSE_DICT
 
     def post(self, request):
         """Method that encodes normal text into morse code.

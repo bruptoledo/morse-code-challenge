@@ -31,3 +31,25 @@ def test_post_morse_decoder_invalid_character(client):
     assert request.status_code == 400
     response = request.json
     assert response["message"] == "Not a valid morse code"
+
+
+def test_post_morse_decoder_invalid_payload(client):
+    request = client.post(
+        path="morse/decode",
+        json={},
+    )
+
+    assert request.status_code == 400
+    response = request.json
+    assert response["schema_errors"]["text"][0] == "Missing data for required field."
+
+
+def test_post_morse_decoder_unknown_field(client):
+    request = client.post(
+        path="morse/decode",
+        json={"text": ".-*", "a": "a"},
+    )
+
+    assert request.status_code == 400
+    response = request.json
+    assert response["schema_errors"]["a"][0] == "Unknown field."
