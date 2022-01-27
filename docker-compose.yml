@@ -1,0 +1,34 @@
+version: '2.3'
+services:
+  web:
+    container_name: challenge_web
+    hostname: challenge_web
+    networks:
+      - challenge-network
+    build:
+      context: .
+      dockerfile: back/Dockerfile
+    restart: on-failure
+    ports:
+      - "5000:5000"
+    volumes:
+      - ${PWD}/back:/app/back
+
+  nodejs:
+    container_name: challenge_nodejs
+    hostname: challenge_nodejs
+    networks:
+      - challenge-network
+    build:
+      context: .
+      dockerfile: front/Dockerfile
+    restart: on-failure
+    ports:
+      - "8080:8080"
+    volumes:
+      - ${PWD}/front:/app/front
+
+networks:
+  challenge-network:
+    external: false
+    name: challenge

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <style>
+        *,
+        h1 {
+            color: rgba(47, 53, 85, 0.863);
+            margin-right: 60px;
+        }
+    </style>
+    <script type="text/javascript">
+
+
+        const decode = (text) => {
+            var xmlhttp = new XMLHttpRequest();
+            const data = JSON.stringify({
+                text: text.value
+            })
+            var url = "http://localhost:5000/morse/decode";
+            xmlhttp.open("POST", url, false);
+            xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xmlhttp.send(data);
+            var res = JSON.parse(xmlhttp.response)
+            var label = document.getElementById("res1")
+            if (xmlhttp.status == 200) {
+                label.textContent = 'Result: ' + res.result
+            } else {
+                label.textContent = 'Error (' + xmlhttp.status + '): Not a valid request'
+            }
+        }
+        const encode = (text) => {
+            var xmlhttp = new XMLHttpRequest();
+            const data = JSON.stringify({
+                text: text.value
+            })
+            var url = "http://localhost:5000/morse/encode";
+            xmlhttp.open("POST", url, false);
+            xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xmlhttp.send(data);
+            var res = JSON.parse(xmlhttp.response)
+            var label = document.getElementById("res2")
+            if (xmlhttp.status == 200) {
+                label.textContent = 'Result: ' + res.result
+            } else {
+                label.textContent = 'Error (' + xmlhttp.status + '): Not a valid request'
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Morse Decoder</h1>
+    <label for="morse_to_text">Text to decode:</label>
+
+    <input type="text" id="morse_to_text" name="morse_to_text" size="30">
+    <button onClick="decode(morse_to_text)">Submit</button>
+    <label id="res1"></label>
+</body>
+
+<body>
+    <h1>Morse Encoder</h1>
+    <label for="text_to_morse">Text to encode:</label>
+
+    <input type="text" id="text_to_morse" name="text_to_morse" size="30">
+    <button onClick="encode(text_to_morse)">Submit</button>
+    <label id="res2"></label>
+</body>
+
+</html>
