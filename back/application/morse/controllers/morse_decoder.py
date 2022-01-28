@@ -22,7 +22,7 @@ class MorseDecoder(Morse):
 
         """
         payload = request.json
-        text = payload.get("text").upper()
+        text = payload.get("text")
         result = ""
         for i in text.split():
             if not i in self._morse_dict_reversed:

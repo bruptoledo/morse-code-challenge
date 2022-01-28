@@ -21,9 +21,9 @@ class MorseEncoder(Morse):
 
         """
         payload = request.json
-        text = payload.get("text")
+        text = payload.get("text").upper()
         result = ""
-        for i in text.upper():
+        for i in text:
             if not i in self._morse_dict:
                 return make_response(jsonify({"message": "Not a valid character"}), 400)
             result += self._morse_dict.get(i) + " "
